@@ -1,5 +1,5 @@
 {
-  "name": "f2wb86solupati",
+  "name": "f2db86solupati",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -17,7 +17,7 @@
     "nodemon": "^2.0.20",
     "pug": "^3.0.2"
   },
-  "description": "Lab 10",
+  "description": "Lab 11",
   "main": "app.js",
   "author": "",
   "license": "ISC"
