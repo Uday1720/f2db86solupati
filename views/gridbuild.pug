@@ -1,0 +1,21 @@
+extends layout 
+
+block content
+    h1= title
+    - var rows = Number(query.rows) 
+    - var cols = Number(query.cols)
+    - if(!(Number.isInteger(rows)) || !(Number.isInteger(cols))) {
+        p Numbers must be passed as arguments
+    - }
+    - else if((rows <= 0 || rows > 10) || (cols <= 0 || cols > 10)) {
+        p Range must be 1 to 10
+    - }
+    - else {
+        table#outer 
+            - for(let i = 0; i < rows; i++) {
+                tr#middle 
+                    - for(let j = 0; j < cols; j++) {
+                        td= (1 + i + j * rows) 
+                    - }
+            - }
+    - }
