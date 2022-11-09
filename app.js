@@ -1,14 +1,32 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var mongoose = require('mongoose')
+var mongodb = require('mongodb')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var Film = require("./models/film");
+require('dotenv').config();
+const connectionString =
+  process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
+db.once("open", function () {
+  console.log("Connection to DB succeeded")
+});
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var filmsRouter = require('./routes/films');
 var gridbuildRouter = require('./routes/gridbuild');
 var selectorRouter = require('./routes/selector');
+var resourceRouter = require('./routes/resource');
 
 var app = express();
 
@@ -27,14 +45,15 @@ app.use('/users', usersRouter);
 app.use('/films', filmsRouter);
 app.use('/gridbuild', gridbuildRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -43,5 +62,37 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+async function recreateDB() {
+  // Delete everything
+  await Film.deleteMany();
+  let instance1 = new
+    Film({
+      name: "style", director: 'raghava',
+      duration: 2.4
+    });
+  let instance2 = new
+    Film({
+      name: "Bahubali", director: 'Rajamouli',
+      duration: 3.0
+    });
+  let instance3 = new
+    Film({
+      name: "Pushpa", director: 'Sukumar',
+      duration: 2.5
+    });
+  instance1.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("First Film saved")
+  });
+  instance2.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Secound Film saved")
+  });
+  instance3.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("3rd Film saved")
+  });
+}
+let reseed = true;
+if (reseed) { recreateDB(); }
 module.exports = app;

@@ -1,8 +1,6 @@
-var express = require('express')
-var router =express.Router();
-
-router.get('/', function(req, res, next) {
-    res.render('films', {title: 'Search Results Films'});
-});
-
+var express = require('express');
+const film_controlers = require('../controllers/film');
+var router = express.Router();
+/* GET films */
+router.get('/', film_controlers.flim_view_all_Page);
 module.exports = router;
