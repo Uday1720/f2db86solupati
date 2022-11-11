@@ -11,9 +11,17 @@ exports.film_list = async function (req, res) {
     }
 };
 // for a specific Film.
-exports.film_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: Film detail: ' + req.params.id);
-};
+exports.film_detail = async function(req, res) { 
+    console.log("detail"  + req.params.id) 
+    try { 
+        result = await Film.findById( req.params.id) 
+        res.send(result) 
+    } catch (error) { 
+        res.status(500) 
+        res.send(`{"error": document for id ${req.params.id} not found`); 
+    } 
+}; 
+
 // Handle Film create on POST.
 exports.film_create_post = async function (req, res) {
     console.log(req.body)
