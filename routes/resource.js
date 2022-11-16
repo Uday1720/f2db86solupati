@@ -21,5 +21,7 @@ router.get('/films', film_controller.film_list);
 /* GET detail film page */ 
 router.get('/detail', film_controller.film_view_one_Page);
 
+/* GET create film page */ 
+router.get('/create', film_controller.film_create_Page); 
 
 module.exports = router;
