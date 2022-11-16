@@ -1,0 +1,22 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let filmid = toShow._id 
+  - let filmName = toShow.name 
+  - let filmDirector = toShow.director 
+  - let filmDuration = toShow.duration
+  div 
+    div.row 
+      div(class='filmAttr mr-3') Film ID is: 
+      div #{filmid} 
+    div.row 
+      div(class='filmAttr mr-3') Film Type is: 
+      div #{filmName} 
+    div.row 
+      div(class='filmAttr mr-3') Film Size is: 
+      div #{filmName} 
+    div.row 
+      div(class='filmAttr mr-3') Film Cost is: 
+      div #{filmDuration} 

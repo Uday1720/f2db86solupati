@@ -18,6 +18,8 @@ router.get('/films/:id', film_controller.film_detail);
 // GET request for list of all Film items.
 router.get('/films', film_controller.film_list);
 
+/* GET detail film page */ 
+router.get('/detail', film_controller.film_view_one_Page);
 
 
 module.exports = router;
