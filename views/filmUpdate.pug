@@ -1,0 +1,44 @@
+extends layout 
+ 
+block content 
+
+  h1= title 
+  - let filmId = toShow._id 
+  - let name = toShow.name 
+  - let director = toShow.director 
+  - let duration = toShow.duration 
+   
+  div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{filmId} 
+  - let actionid = "/resource/films/" + filmId
+
+  form(id='filmForm', action=actionid, method="PUT") 
+    div.form-group 
+        label.filmAttr(for='name') Film Name 
+        input#name(type='text', name='name', value=`${name}`) 
+    div.form-group 
+        label.filmAttr(for='director') Film Director 
+        input#director(type='text', name='director', value=`${director}`) 
+    div.form-group 
+        label.filmAttr(for='duration') Film Duration 
+        input#duration(type='number', name='duration', step='any',value=`${duration}`) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['filmForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 

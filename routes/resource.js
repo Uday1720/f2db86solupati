@@ -24,4 +24,7 @@ router.get('/detail', film_controller.film_view_one_Page);
 /* GET create film page */ 
 router.get('/create', film_controller.film_create_Page); 
 
+/* GET create update page */ 
+router.get('/update', film_controller.film_update_Page); 
+
 module.exports = router;

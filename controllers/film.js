@@ -116,3 +116,18 @@ exports.film_create_Page =  function(req, res) {
         res.send(`{'error': '${err}'}`); 
     } 
 }; 
+
+
+// Handle building the view for updating a film. 
+// query provides the id 
+exports.film_update_Page =  async function(req, res) { 
+    console.log("update view for item "+req.query.id) 
+    try{ 
+        let result = await Film.findById(req.query.id) 
+        res.render('filmUpdate', { title: 'Film Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
