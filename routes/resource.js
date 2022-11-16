@@ -27,4 +27,7 @@ router.get('/create', film_controller.film_create_Page);
 /* GET create update page */ 
 router.get('/update', film_controller.film_update_Page); 
 
+/* GET delete film page */ 
+router.get('/delete', film_controller.film_delete_Page); 
+
 module.exports = router;
