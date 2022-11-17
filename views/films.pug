@@ -2,14 +2,18 @@ extends layout
 
 block content 
     h1= title
-    //- - var results = [{"name": "Iron Man", "duration": 2.06, "director": "Jon Favreau"}, {"name": "Ghost Rider", "duration": 2.03, "director": "Mark Steven Johnson"}, {"name": "Ratatouille", "duration": 1.51, "director": "Brad Bird"}]
+    - var results = results
     div.container-fluid
         div.row
             each item, index in results
+                - let destination = `dispatch(\"/films/update?id=${item._id}\")` 
                 div.col-sm-2(onclick=`buy(${index})`) #{item["name"]}, #{item["duration"]}, #{item["director"]}
-        
+                button.btn( class="btn-primary btn-sm", style="width: 120px;", onclick= destination) Update        
 
     script. 
         function buy(index) {
             alert("You purchased item " + index);
         }
+        function dispatch(path){ 
+            window.location.href=path 
+        } 

@@ -16,18 +16,6 @@ router.put('/films/:id', film_controller.film_update_put);
 // GET request for one Film.
 router.get('/films/:id', film_controller.film_detail);
 // GET request for list of all Film items.
-router.get('/films', film_controller.film_list);
-
-/* GET detail film page */ 
-router.get('/detail', film_controller.film_view_one_Page);
-
-/* GET create film page */ 
-router.get('/create', film_controller.film_create_Page); 
-
-/* GET create update page */ 
-router.get('/update', film_controller.film_update_Page); 
-
-/* GET delete film page */ 
-router.get('/delete', film_controller.film_delete_Page); 
+router.get('/films', film_controller.film_list); 
 
 module.exports = router;
