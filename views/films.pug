@@ -6,10 +6,12 @@ block content
     div.container-fluid
         div.row
             each item, index in results
-                - let destination = `dispatch(\"/films/update?id=${item._id}\")` 
                 div.col-sm-2(onclick=`buy(${index})`) #{item["name"]}, #{item["duration"]}, #{item["director"]}
-                button.btn( class="btn-primary btn-sm", style="width: 120px;", onclick= destination) Update        
-
+                button.btn( class="btn-warning btn-sm", style="width: 120px;", onclick= `dispatch(\"/films/detail?id=${item._id}\")`) View
+                button.btn( class="btn-primary btn-sm", style="width: 120px;", onclick= `dispatch(\"/films/update?id=${item._id}\")`) Update
+                button.btn( class="btn-danger btn-sm", style="width: 120px;", onclick= `dispatch(\"/films/delete?id=${item._id}\")`) Delete       
+                br
+                br
     script. 
         function buy(index) {
             alert("You purchased item " + index);
